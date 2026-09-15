@@ -1,4 +1,4 @@
 function showMessage() {
  document.getElementById("message").innerText =
- "Git sedang mencatat project ini!";
+ "Perubahan berhasil disimpan menggunakan Git!";
 }

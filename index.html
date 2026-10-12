@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaundryKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { brand: '#0d5c4d', brandlight: '#e6f4f1' } } }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body class="bg-white text-gray-800 pt-16">
+
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-brand text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="font-bold text-lg">LaundryKu</a>
+      <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+      <ul class="hidden md:flex gap-6">
+        <li><a href="#home" class="nav-link hover:underline">Home</a></li>
+        <li><a href="#layanan" class="nav-link hover:underline">Layanan</a></li>
+        <li><a href="#form" class="nav-link hover:underline">Pesanan</a></li>
+      </ul>
+    </div>
+    <ul id="mobileMenu" class="hidden md:hidden px-4 pb-3 space-y-2">
+      <li><a href="#home" class="block">Home</a></li>
+      <li><a href="#layanan" class="block">Layanan</a></li>
+      <li><a href="#form" class="block">Pesanan</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="max-w-6xl mx-auto px-4 my-10">
+    <div class="bg-brandlight rounded-2xl p-6 md:p-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="uppercase text-xs font-bold text-brand mb-2">Laundry Praktis Untuk Kamu</p>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-brand leading-tight">
+            Baju bersih, hidup lebih ringan.
+          </h1>
+          <p class="text-gray-600 mt-4">
+            LaundryKu membantu pengguna melakukan pemesanan jasa laundry dengan mudah, melihat harga layanan, dan memantau status laundry.
+          </p>
+          <div class="mt-6 flex gap-3 flex-wrap">
+            <a href="#layanan" class="bg-brand text-white px-6 py-2 rounded-lg hover:opacity-90">Lihat Layanan</a>
+            <a href="#form" class="border border-gray-800 px-6 py-2 rounded-lg hover:bg-gray-100">Pesan Sekarang</a>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow p-6">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xs text-gray-500">Pesanan Terbaru</span>
+            <span class="bg-brand text-white text-xs px-2 py-1 rounded-full">Diproses</span>
+          </div>
+          <h3 class="font-bold text-lg">Order #LK001</h3>
+          <p class="text-gray-500 text-sm mb-4">Cuci + Setrika</p>
+          <div class="flex justify-between font-semibold mb-3">
+            <span>8 Kg</span>
+            <span>Rp40.000</span>
+          </div>
+          <p class="text-xs text-gray-500">Estimasi selesai: Hari ini, 17:00</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="font-bold text-lg">Cuci Kering</h3>
+        <p class="text-sm text-gray-500 mt-1">Pakaian dicuci dan dikeringkan dengan rapi.</p>
+        <p class="font-bold mt-3">Rp4.000/kg</p>
+      </div>
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="font-bold text-lg">Cuci + Setrika</h3>
+        <p class="text-sm text-gray-500 mt-1">Pakaian dicuci, dikeringkan, kemudian disetrika.</p>
+        <p class="font-bold mt-3">Rp5.000/kg</p>
+      </div>
+      <div class="border rounded-xl p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="font-bold text-lg">Express</h3>
+        <p class="text-sm text-gray-500 mt-1">Laundry dengan proses cepat untuk kebutuhan mendesak.</p>
+        <p class="font-bold mt-3">Rp8.000/kg</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan" class="max-w-6xl mx-auto px-4 my-16">
+    <p class="uppercase text-xs font-bold text-brand mb-1">Simple & Transparan</p>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-brand mb-6">Daftar Harga</h2>
+
+    <div class="overflow-x-auto rounded-xl border">
+      <table class="w-full text-left text-sm md:text-base">
+        <thead class="bg-brandlight text-brand">
+          <tr>
+            <th class="px-4 py-3">Layanan</th>
+            <th class="px-4 py-3">Harga</th>
+            <th class="px-4 py-3">Estimasi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">Cuci Kering</td>
+            <td class="px-4 py-3 font-semibold">Rp4.000/kg</td>
+            <td class="px-4 py-3">2 Hari</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">Cuci + Setrika</td>
+            <td class="px-4 py-3 font-semibold">Rp5.000/kg</td>
+            <td class="px-4 py-3">2 Hari</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">Express</td>
+            <td class="px-4 py-3 font-semibold">Rp8.000/kg</td>
+            <td class="px-4 py-3">6 Jam</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="form" class="max-w-3xl mx-auto px-4 my-16">
+    <div class="bg-brandlight rounded-2xl p-6 md:p-8">
+      <p class="uppercase text-xs font-bold text-brand mb-1">Pesan Sekarang</p>
+      <h2 class="text-2xl md:text-3xl font-extrabold text-brand mb-6">Form Tambah Pesanan</h2>
+
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Nama Lengkap</label>
+          <input type="text" required placeholder="Nama kamu"
+                 class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">No. HP</label>
+          <input type="tel" required placeholder="08xxxxxxxxxx"
+                 class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Jenis Layanan</label>
+          <select required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand">
+            <option value="">-- Pilih Layanan --</option>
+            <option>Cuci Kering — Rp4.000/kg</option>
+            <option>Cuci + Setrika — Rp5.000/kg</option>
+            <option>Express — Rp8.000/kg</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Berat (Kg)</label>
+          <input type="number" min="1" required placeholder="8"
+                 class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium mb-1">Alamat Penjemputan</label>
+          <textarea rows="3" required placeholder="Alamat lengkap..."
+                    class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand"></textarea>
+        </div>
+        <div class="md:col-span-2 flex justify-end">
+          <button type="submit" class="bg-brand text-white px-6 py-2 rounded-lg hover:opacity-90">
+            Kirim Pesanan
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-brand text-white text-center py-5 mt-16">
+    <p class="text-sm">© 2026 LaundryKu — Annisa Azzahra Putri — 103022400033</p>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    menu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => menu.classList.add('hidden'))
+    );
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (scrollY >= sec.offsetTop - 120) current = sec.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('font-bold', 'underline');
+        if (link.getAttribute('href') === '#' + current)
+          link.classList.add('font-bold', 'underline');
+      });
+    });
+  </script>
+</body>
+</html>

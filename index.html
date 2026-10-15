@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaundryKu</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#2563eb',
+            soft: '#eff6ff'
+          }
+        }
+      }
+    };
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
+      <a href="#home" class="text-2xl font-bold text-brand">
+        LaundryKu
+      </a>
+
+      <button id="menuButton"
+        class="md:hidden text-2xl"
+        type="button">
+        ☰
+      </button>
+
+      <div id="navMenu"
+        class="hidden md:flex flex-col md:flex-row gap-5 absolute md:static top-full left-0 w-full md:w-auto bg-white p-5 md:p-0 shadow-md md:shadow-none">
+        <a href="#home" class="hover:text-brand">Beranda</a>
+        <a href="#layanan" class="hover:text-brand">Layanan</a>
+        <a href="#pesanan" class="hover:text-brand">Pemesanan</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="bg-blue-50">
+    <div class="max-w-6xl mx-auto px-5 py-20 text-center">
+      <p class="text-brand font-semibold mb-3">
+        Praktis, Bersih, dan Terpercaya
+      </p>
+
+      <h1 class="text-4xl md:text-5xl font-bold mb-5">
+        Urusan Laundry Jadi Lebih Mudah
+      </h1>
+
+      <p class="text-slate-600 max-w-2xl mx-auto mb-8">
+        LaundryKu membantu kamu memilih layanan laundry,
+        melihat harga, dan membuat pesanan dengan mudah.
+      </p>
+
+      <a href="#pesanan"
+        class="inline-block bg-brand text-white px-7 py-3 rounded-lg hover:bg-blue-700">
+        Pesan Sekarang
+      </a>
+    </div>
+  </section>
+
+  <section id="layanan" class="max-w-6xl mx-auto px-5 py-16">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold mb-3">Layanan Laundry</h2>
+      <p class="text-slate-600">
+        Pilih layanan sesuai kebutuhanmu.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto bg-white rounded-xl shadow-sm">
+      <table class="w-full text-left">
+        <thead class="bg-blue-100">
+          <tr>
+            <th class="p-4">No.</th>
+            <th class="p-4">Nama Layanan</th>
+            <th class="p-4">Estimasi</th>
+            <th class="p-4">Harga per Kg</th>
+          </tr>
+        </thead>
+
+        <tbody id="tabelLayanan">
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="pesanan" class="bg-blue-50 py-16">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-3">Form Pemesanan</h2>
+        <p class="text-slate-600">
+          Isi data berikut untuk membuat pesanan laundry.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-sm">
+
+        <form id="formPesanan" class="space-y-5">
+
+          <div>
+            <label for="nama" class="block font-medium mb-2">
+              Nama Pelanggan
+            </label>
+            <input type="text" id="nama"
+              placeholder="Masukkan nama lengkap"
+              class="w-full border border-slate-300 rounded-lg p-3"
+              required>
+          </div>
+
+          <div>
+            <label for="hp" class="block font-medium mb-2">
+              Nomor HP
+            </label>
+            <input type="tel" id="hp"
+              placeholder="Contoh: 081234567890"
+              class="w-full border border-slate-300 rounded-lg p-3"
+              required>
+          </div>
+
+          <div>
+            <label for="layananSelect" class="block font-medium mb-2">
+              Pilih Layanan
+            </label>
+            <select id="layananSelect"
+              class="w-full border border-slate-300 rounded-lg p-3"
+              required>
+              <option value="">Pilih layanan laundry</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="berat" class="block font-medium mb-2">
+              Berat Laundry (Kg)
+            </label>
+            <input type="number" id="berat"
+              min="1" step="0.5"
+              placeholder="Masukkan berat laundry"
+              class="w-full border border-slate-300 rounded-lg p-3"
+              required>
+          </div>
+
+          <div>
+            <label for="alamat" class="block font-medium mb-2">
+              Alamat
+            </label>
+            <textarea id="alamat" rows="3"
+              placeholder="Masukkan alamat lengkap"
+              class="w-full border border-slate-300 rounded-lg p-3"
+              required></textarea>
+          </div>
+
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <p class="text-slate-600">Estimasi total biaya</p>
+            <p id="totalHarga" class="text-2xl font-bold text-brand">
+              Rp0
+            </p>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-brand text-white py-3 rounded-lg hover:bg-blue-700">
+            Buat Pesanan
+          </button>
+
+        </form>
+
+        <div id="pesanNotifikasi"
+          class="hidden mt-5 p-4 rounded-lg">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-5 py-16">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div>
+        <h2 class="text-3xl font-bold mb-2">Daftar Pesanan</h2>
+        <p class="text-slate-600">
+          Data pesanan yang sudah dimasukkan.
+        </p>
+      </div>
+
+      <button id="togglePesanan"
+        type="button"
+        class="bg-blue-100 text-brand px-5 py-3 rounded-lg hover:bg-blue-200">
+        Tampilkan / Sembunyikan
+      </button>
+    </div>
+
+    <div id="areaPesanan" class="overflow-x-auto bg-white rounded-xl shadow-sm">
+      <table class="w-full text-left">
+        <thead class="bg-blue-100">
+          <tr>
+            <th class="p-4">Nama</th>
+            <th class="p-4">Layanan</th>
+            <th class="p-4">Berat</th>
+            <th class="p-4">Total</th>
+            <th class="p-4">Status</th>
+            <th class="p-4">Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody id="tabelPesanan">
+          <tr id="pesananKosong">
+            <td colspan="6" class="p-6 text-center text-slate-500">
+              Belum ada pesanan.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 text-white py-8">
+    <div class="max-w-6xl mx-auto px-5 text-center">
+      <h3 class="text-xl font-bold mb-2">LaundryKu</h3>
+      <p class="text-slate-300 mb-3">
+        Solusi laundry praktis untuk kebutuhan sehari-hari.
+      </p>
+      <p class="text-slate-400 text-sm">
+        Annisa Azzahra Putri - 103022400033
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const daftarLayanan = [
+      {
+        id: 1,
+        nama: "Cuci Kering",
+        estimasi: "2 hari",
+        harga: 7000
+      },
+      {
+        id: 2,
+        nama: "Cuci Setrika",
+        estimasi: "3 hari",
+        harga: 10000
+      },
+      {
+        id: 3,
+        nama: "Express",
+        estimasi: "1 hari",
+        harga: 15000
+      },
+      {
+        id: 4,
+        nama: "Setrika Saja",
+        estimasi: "1 hari",
+        harga: 5000
+      }
+    ];
+
+    let daftarPesanan = [];
+    let nomorPesanan = 1;
+
+    function formatRupiah(angka) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        maximumFractionDigits: 0
+      }).format(angka);
+    }
+
+    function tampilkanLayanan() {
+      let isiTabel = "";
+
+      for (let i = 0; i < daftarLayanan.length; i++) {
+        const layanan = daftarLayanan[i];
+
+        isiTabel += `
+          <tr class="border-t hover:bg-slate-50">
+            <td class="p-4">${layanan.id}</td>
+            <td class="p-4 font-medium">${layanan.nama}</td>
+            <td class="p-4">${layanan.estimasi}</td>
+            <td class="p-4">${formatRupiah(layanan.harga)}</td>
+          </tr>
+        `;
+      }
+
+      $("#tabelLayanan").html(isiTabel);
+
+      let pilihan = '<option value="">Pilih layanan laundry</option>';
+
+      for (let i = 0; i < daftarLayanan.length; i++) {
+        const layanan = daftarLayanan[i];
+
+        pilihan += `
+          <option value="${layanan.id}">
+            ${layanan.nama} - ${formatRupiah(layanan.harga)}/kg
+          </option>
+        `;
+      }
+
+      $("#layananSelect").html(pilihan);
+    }
+
+    function hitungTotal() {
+      const idLayanan = Number($("#layananSelect").val());
+      const berat = Number($("#berat").val());
+
+      const layanan = daftarLayanan.find(function(item) {
+        return item.id === idLayanan;
+      });
+
+      if (!layanan || !Number.isFinite(berat) || berat <= 0) {
+        $("#totalHarga").text("Rp0");
+        return 0;
+      }
+
+      const total = layanan.harga * berat;
+
+      $("#totalHarga").text(formatRupiah(total));
+
+      return total;
+    }
+
+    function tampilkanNotifikasi(pesan, berhasil) {
+      const warna = berhasil
+        ? "bg-green-100 text-green-700"
+        : "bg-red-100 text-red-700";
+
+      $("#pesanNotifikasi")
+        .removeClass("hidden bg-green-100 text-green-700 bg-red-100 text-red-700")
+        .addClass(warna)
+        .text(pesan)
+        .hide()
+        .fadeIn(300);
+    }
+
+    function tampilkanPesanan() {
+      const tabel = $("#tabelPesanan");
+      tabel.empty();
+
+      if (daftarPesanan.length === 0) {
+        tabel.html(`
+          <tr>
+            <td colspan="6" class="p-6 text-center text-slate-500">
+              Belum ada pesanan.
+            </td>
+          </tr>
+        `);
+
+        return;
+      }
+
+      daftarPesanan.forEach(function(pesanan) {
+        tabel.append(`
+          <tr class="border-t hover:bg-slate-50">
+            <td class="p-4">
+              <div class="font-medium">${pesanan.nama}</div>
+              <div class="text-sm text-slate-500">${pesanan.hp}</div>
+            </td>
+
+            <td class="p-4">${pesanan.layanan}</td>
+            <td class="p-4">${pesanan.berat} kg</td>
+            <td class="p-4 font-medium">${formatRupiah(pesanan.total)}</td>
+
+            <td class="p-4">
+              <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
+                ${pesanan.status}
+              </span>
+            </td>
+
+            <td class="p-4">
+              <button
+                type="button"
+                class="hapusPesanan bg-red-100 text-red-600 px-3 py-2 rounded-lg hover:bg-red-200"
+                data-id="${pesanan.id}">
+                Hapus
+              </button>
+            </td>
+          </tr>
+        `);
+      });
+    }
+
+    $("#layananSelect, #berat").on("input change", function() {
+      hitungTotal();
+    });
+
+    $("#formPesanan").on("submit", function(event) {
+      event.preventDefault();
+
+      const nama = $("#nama").val().trim();
+      const hp = $("#hp").val().trim();
+      const idLayanan = Number($("#layananSelect").val());
+      const berat = Number($("#berat").val());
+      const alamat = $("#alamat").val().trim();
+
+      if (!nama || !hp || !idLayanan || !alamat) {
+        tampilkanNotifikasi("Semua data harus diisi.", false);
+        return;
+      }
+
+      if (!/^[0-9+\-\s]{8,20}$/.test(hp)) {
+        tampilkanNotifikasi("Nomor HP tidak valid.", false);
+        return;
+      }
+
+      if (!Number.isFinite(berat) || berat <= 0) {
+        tampilkanNotifikasi("Berat laundry harus lebih dari 0 kg.", false);
+        return;
+      }
+
+      const layanan = daftarLayanan.find(function(item) {
+        return item.id === idLayanan;
+      });
+
+      if (!layanan) {
+        tampilkanNotifikasi("Silakan pilih layanan yang tersedia.", false);
+        return;
+      }
+
+      const pesananBaru = {
+        id: nomorPesanan++,
+        nama: nama,
+        hp: hp,
+        layanan: layanan.nama,
+        berat: berat,
+        alamat: alamat,
+        total: layanan.harga * berat,
+        status: "Menunggu"
+      };
+
+      // Menambahkan pesanan ke array
+      daftarPesanan.push(pesananBaru);
+
+      tampilkanPesanan();
+
+      this.reset();
+      $("#totalHarga").text("Rp0");
+
+      tampilkanNotifikasi("Pesanan berhasil ditambahkan.", true);
+
+      $("#areaPesanan").hide().fadeIn(500);
+
+      document.getElementById("pesanan").scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+
+    $("#tabelPesanan").on("click", ".hapusPesanan", function() {
+      const id = Number($(this).attr("data-id"));
+
+      daftarPesanan = daftarPesanan.filter(function(pesanan) {
+        return pesanan.id !== id;
+      });
+
+      tampilkanPesanan();
+
+      tampilkanNotifikasi("Pesanan berhasil dihapus.", true);
+    });
+
+    $("#togglePesanan").on("click", function() {
+      $("#areaPesanan").slideToggle(300);
+    });
+
+    $("#menuButton").on("click", function() {
+      $("#navMenu").slideToggle(200);
+    });
+
+    $("#navMenu a").on("click", function() {
+      if (window.innerWidth < 768) {
+        $("#navMenu").slideUp(200);
+      }
+    });
+
+    $(document).ready(function() {
+      tampilkanLayanan();
+      tampilkanPesanan();
+    });
+  </script>
+
+</body>
+</html>
